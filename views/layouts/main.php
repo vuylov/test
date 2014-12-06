@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\Role;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -35,14 +36,17 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Услуги', 'url' => ['/site/services']],
-                    ['label' => 'Партнеры', 'url' => ['/site/partners']],
                     ['label' => 'Контакты', 'url' => ['/site/contact']],
+                    (Yii::$app->user->identity->role_id == Role::ADMIN)?
+                        ['label' => 'Недвижимость', 'url' => ['admin/index']]:'',
+                    (Yii::$app->user->identity->role_id == Role::ADMIN)?
+                        ['label' => 'Пользователи', 'url' => ['user/index']]:'',
                     Yii::$app->user->isGuest ?
                         ['label' => 'Войти', 'url' => ['/site/login']] :
                         ['label' => 'Выйти (' . Yii::$app->user->identity->surname.' '.Yii::$app->user->identity->firstname. ')',
                             'url' => ['/site/logout'],
                             'linkOptions' => ['data-method' => 'post']],
+
                 ],
             ]);
             NavBar::end();

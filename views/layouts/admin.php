@@ -36,9 +36,9 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Услуги', 'url' => ['/site/services']],
-            ['label' => 'Партнеры', 'url' => ['/site/partners']],
             ['label' => 'Контакты', 'url' => ['/site/contact']],
+            (Yii::$app->user->identity->role_id == Role::ADMIN)?
+                ['label' => 'Недвижимость', 'url' => ['admin/index']]:'',
             (Yii::$app->user->identity->role_id == Role::ADMIN)?
                 ['label' => 'Пользователи', 'url' => ['user/index']]:'',
             Yii::$app->user->isGuest ?
