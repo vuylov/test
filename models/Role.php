@@ -14,6 +14,8 @@ use Yii;
  */
 class Role extends \yii\db\ActiveRecord
 {
+    CONST ADMIN = 1;
+    CONST REALTOR = 2;
     /**
      * @inheritdoc
      */
