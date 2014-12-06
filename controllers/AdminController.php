@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
  */
 class AdminController extends Controller
 {
+    public $layout = 'admin';
     public function behaviors()
     {
         return [

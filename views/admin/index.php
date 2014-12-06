@@ -13,5 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="realty-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <hr>
 
 </div>
