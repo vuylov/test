@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
+use yii\helpers\VarDumper;
 use yii\web\IdentityInterface;
 
 /**
@@ -136,10 +137,9 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUserEmail($email)
     {
-        static::find([
-            'email'     => $email,
-            'status'    => Status::ACTIVE
-        ])->one();
+        return static::find()->andWhere(
+            ['and', ['email'    => $email], ['status' => Status::ACTIVE]]
+        )->one();
     }
 
     /**

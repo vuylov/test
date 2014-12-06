@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -49,6 +50,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        VarDumper::dump(Yii::$app->user->identity, 10, true);
         return $this->render('index');
     }
 
@@ -59,6 +61,9 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
+
+        $model->load(Yii::$app->request->post());
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
@@ -92,5 +97,10 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionPassword($hash)
+    {
+        echo Yii::$app->getSecurity()->generatePasswordHash($hash);
     }
 }

@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\helpers\VarDumper;
 
 /**
  * LoginForm is the model behind the login form.
@@ -26,6 +27,7 @@ class LoginForm extends Model
             // username and password are both required
             [['email', 'password'], 'required'],
             // rememberMe must be a boolean value
+            ['email', 'email'],
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
