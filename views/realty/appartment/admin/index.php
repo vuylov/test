@@ -4,6 +4,9 @@ use yii\widgets\ListView;
 ?>
 <h2>Квартиры</h2>
 <?php echo $this->render('_search', ['model' => $searchModel, 'type' => $type]); ?>
+<div class="pull-right">
+    <?=Html::a('Добавить квартиру', ['create', 'type' => $type], ['class' => 'btn btn-success']); ?>
+</div>
 <hr>
 <div class="app=list">
     <?= ListView::widget([

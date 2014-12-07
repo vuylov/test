@@ -76,11 +76,18 @@ class AdminController extends Controller
     /**
      * Creates a new Realty model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param string $type
+     * @throws NotFoundHttpException
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($type = null)
     {
+        if(is_null($type))
+            throw new NotFoundHttpException(' Не указан тип недвижимости');
+
         $model = new Realty();
+        $model->type_id = $type;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
