@@ -7,6 +7,9 @@ use app\models\Builder;
 use app\models\Room;
 use app\models\Category;
 use app\models\Layout;
+use app\models\Furnish;
+use app\models\User;
+use app\models\Role;
 ?>
 <div class="app-filter">
     <?php $form = ActiveForm::begin([
@@ -15,6 +18,15 @@ use app\models\Layout;
         'enableAjaxValidation'      => false,
         'enableClientValidation'    => false,
     ]); ?>
+
+    <?php if(Yii::$app->user->identity->role_id == Role::ADMIN):?>
+    <?= $form->field($model, 'user_id')->dropDownList(
+        ArrayHelper::map(User::find()->all(), 'id', 'fullname'),
+        [
+            'prompt'    => 'Все риэлторы'
+        ]
+    );?>
+    <?php endif;?>
 
     <?= $form->field($model, 'region_id')->dropDownList(
         ArrayHelper::map(Region::find()->all(), 'id', 'name'),
@@ -49,6 +61,14 @@ use app\models\Layout;
             'prompt'    => 'Все виды планировок'
         ]
     ); ?>
+
+    <?php echo $form->field($model, 'furnish_id')->dropDownList(
+        ArrayHelper::map(Furnish::find()->all(), 'id', 'name'),
+        [
+            'prompt'    => 'Любая отделка'
+        ]
+    );?>
+
     <?php echo $form->field($model, 'address') ?>
 
     <?php echo $form->field($model, 'beforePrice');?>
