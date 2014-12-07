@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Status;
 use Yii;
 use app\models\Realty;
 use app\models\RealtySearch;
@@ -51,11 +52,25 @@ class AdminController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($type = null, $id = null)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = Realty::getInstanceType($type);
+
+        $searchModel = new RealtySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $type, Status::ACTIVE);
+
+        if(is_null($id))
+        {
+            return $this->render('//realty/'.$model['folder'].'/admin/index', [
+                'type'          => $type,
+                'searchModel'   => $searchModel,
+                'dataProvider'  => $dataProvider
+            ]);
+        }
+        else
+        {
+            echo 'Id ='.$id;
+        }
     }
 
     /**

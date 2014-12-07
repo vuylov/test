@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\models\Role;
 use app\models\Realty;
 use yii\helpers\VarDumper;
 use app\models\Status;
@@ -55,7 +56,8 @@ class RealtySearch extends Realty
             'beforePrice'   => 'Цена от',
             'afterPrice'    => 'Цена до',
             'earthtype_id'  => 'Тип назначения',
-            'commercetype_id'=> 'Тип коммерческой недвжимиости'
+            'commercetype_id'=> 'Тип коммерческой недвжимиости',
+            'user_id'       => 'Недвижимость добавил'
 
         ];
     }
@@ -77,6 +79,11 @@ class RealtySearch extends Realty
             'type_id'   => $type,
             'status'    => $active
         ]);
+
+        if(Yii::$app->user->identity->role_id == Role::REALTOR)
+            $query->andWhere([
+                'user_id'   => Yii::$app->user->id
+            ]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
