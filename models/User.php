@@ -152,4 +152,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
+
+    public function getFullname()
+    {
+        return $this->surname.' '.$this->firstname;
+    }
 }
