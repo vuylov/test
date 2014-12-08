@@ -4,13 +4,21 @@
  * @var $this yii\web\View
  * @var $form yii\widgets\ActiveForm
  */
-use yii\helpers\ArrayHelper;
+use yii\widgets\DetailView;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 ?>
-
+<div class="pull-right">
+    <?= Html::a('Редактировать', ['admin/update', 'id' => $model->id], ['class' => 'btn btn-success']);?>
+</div>
 <div class="edit-form">
-    <?php $form = ActiveForm::begin();?>
-
-    <?php $form->end();?>
+    <?php echo DetailView::widget([
+        'model'         => $model,
+        'attributes'    => [
+            'address',
+            [
+                'label' => 'Район',
+                'value' => $model->region->name
+            ],
+        ]
+    ]);?>
 </div>
