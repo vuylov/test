@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\web\HttpException;
 
 /**
@@ -36,6 +37,16 @@ use yii\web\HttpException;
  */
 class Realty extends ActiveRecord
 {
+    /**
+     * @var upload file
+     */
+    public $file;
+
+    /**
+     * @param null $type
+     * @return null
+     * @throws HttpException
+     */
     public static function getInstanceType($type = null)
     {
         if(is_null($type))
@@ -95,9 +106,10 @@ class Realty extends ActiveRecord
     public function rules()
     {
         return [
-            [['type_id', 'region_id', 'price', 'address', 'detail'], 'required'],
-            [['type_id', 'user_id', 'region_id', 'builder_id', 'room_id', 'layout_id', 'housetype_id', 'price', 'status'], 'integer'],
+            [['type_id', 'region_id', 'price', 'address', 'detail', 'owner'], 'required', 'message' => 'Данное поле обязательно для заполненния'],
+            [['type_id', 'user_id', 'region_id', 'builder_id', 'room_id', 'layout_id', 'housetype_id', 'category_id','furnish_id','earthtype_id','commercetype_id', 'price', 'status', 'square', 'square_plot'], 'integer', 'message' => 'Данное поле может быть только числовым'],
             [['detail'], 'string'],
+            [['file'], 'file', 'maxFiles' => 5],
             [['create_time', 'deactivate_time'], 'safe'],
             [['square', 'square_plot', 'address', 'owner'], 'string', 'max' => 255]
         ];
@@ -127,7 +139,8 @@ class Realty extends ActiveRecord
             'create_time' => 'Дата добавления',
             'deactivate_time' => 'Дата скрытия',
             'furnish_id'    => 'Тип отделки',
-            'category_id'   => 'Тип постройки'
+            'category_id'   => 'Тип постройки',
+            'file'          => 'Изображение для загрузки'
         ];
     }
 
@@ -209,5 +222,18 @@ class Realty extends ActiveRecord
     public function getCommercetype()
     {
         return $this->hasOne(Commercetype::className(), ['id' => 'commercetype_id']);
+    }
+
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert)){
+
+            if($this->isNewRecord){
+                $this->user_id      = Yii::$app->user->id;
+                $this->setAttribute('create_time', new Expression('CURRENT_TIMESTAMP'));
+            }
+            return true;
+        }
+        return false;
     }
 }
