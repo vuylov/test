@@ -31,7 +31,7 @@ class File extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['realty_id', 'name', 'extension'], 'required'],
+            [['realty_id', 'name','path', 'extension'], 'required'],
             [['realty_id'], 'integer'],
             [['create_time'], 'safe'],
             [['name'], 'string', 'max' => 255],
