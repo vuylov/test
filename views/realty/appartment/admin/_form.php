@@ -9,6 +9,9 @@ use app\models\Category;
 use app\models\Layout;
 use app\models\Furnish;
 use kartik\file\FileInput;
+use app\models\Role;
+use app\models\User;
+use app\models\Status;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Realty */
@@ -16,6 +19,20 @@ use kartik\file\FileInput;
 ?>
 <div class="appartment-form">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
+
+    <?php if(Yii::$app->user->identity->role_id == Role::ADMIN):?>
+
+        <?= $form->field($model, 'user_id')->dropDownList(
+            ArrayHelper::map(User::find()->all(), 'id', 'fullname'),
+            ['prompt' => 'Выберите риэлтора']
+        );?>
+
+        <?= $form->field($model, 'status')->dropDownList(
+            [Status::ACTIVE => 'Активный', Status::DEACTIVE => 'Неактивный'],
+            ['prompt' => 'Выберите статус']
+        );?>
+
+    <?php endif;?>
 
     <?= $form->field($model, 'region_id')->dropDownList(
         ArrayHelper::map(Region::find()->all(), 'id', 'name'),
@@ -77,7 +94,5 @@ use kartik\file\FileInput;
     <div class="pull-right">
         <?= Html::submitButton(($model->isNewRecord)?"Добавить":"Обновить", ['class' => 'btn btn-primary']) ?>
     </div>
-
-
     <?php ActiveForm::end();?>
 </div>

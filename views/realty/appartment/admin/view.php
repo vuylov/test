@@ -15,10 +15,8 @@ use yii\helpers\Html;
         'model'         => $model,
         'attributes'    => [
             'address',
-            [
-                'label' => 'Район',
-                'value' => $model->region->name
-            ],
+            ['label' => 'Район','value' => $model->region->name],
+            ['label' => 'Застройщик', 'value' => ($model->builder->name)?$model->builder->name:'Нет информации о застройщике'],
         ]
     ]);?>
 </div>
