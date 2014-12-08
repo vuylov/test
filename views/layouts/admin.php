@@ -37,7 +37,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Контакты', 'url' => ['/site/contact']],
-            (Yii::$app->user->identity->role_id == Role::ADMIN)?
+            (Yii::$app->user->identity->role_id)?
                 ['label' => 'Недвижимость', 'url' => ['admin/index']]:'',
             (Yii::$app->user->identity->role_id == Role::ADMIN)?
                 ['label' => 'Пользователи', 'url' => ['user/index']]:'',
