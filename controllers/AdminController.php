@@ -1,15 +1,18 @@
 <?php
 
 namespace app\controllers;
-
-use app\models\Status;
+use app\models\File;
 use Yii;
 use app\models\Realty;
 use app\models\RealtySearch;
+use yii\db\Expression;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\models\Status;
+use yii\web\UploadedFile;
 
 /**
  * AdminController implements the CRUD actions for Realty model.
@@ -69,7 +72,10 @@ class AdminController extends Controller
         }
         else
         {
-            echo 'Id ='.$id;
+            $realty = Realty::findOne($id);
+            return $this->render('//realty/'.$model['folder'].'/admin/view',[
+                'model' => $realty
+            ]);
         }
     }
 
@@ -83,16 +89,33 @@ class AdminController extends Controller
      */
     public function actionCreate($type = null)
     {
-        if(is_null($type))
-            throw new NotFoundHttpException(' Не указан тип недвижимости');
+        $modelView = Realty::getInstanceType($type);
 
         $model = new Realty();
         $model->type_id = $type;
 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            $files = UploadedFile::getInstances($model, 'file');
+
+            foreach($files as $file)
+            {
+                $randomName = Yii::$app->getSecurity()->generateRandomString(10);
+
+                $dbFile = new File();
+                $dbFile->realty_id = $model->id;
+                $dbFile->name       = $file->baseName;
+                $dbFile->path       = 'upload/'.$randomName.'.'.$file->extension;
+                $dbFile->extension  = $file->extension;
+                $dbFile->setAttribute('create_time', new Expression('CURRENT_TIMESTAMP'));
+                $dbFile->save();
+
+                $file->saveAs($dbFile->path);
+            }
+            return $this->redirect(['view', 'type' => $type,'id' => $model->id]);
         } else {
-            return $this->render('create', [
+            return $this->render('//realty/'.$modelView['folder'].'/admin/create', [
                 'model' => $model,
             ]);
         }
@@ -106,12 +129,17 @@ class AdminController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model  = $this->findModel($id);
+        $view   = Realty::getInstanceType($model->type_id);
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            //TODO: update files HERE
+
+
+            return $this->redirect(['view', 'type' => $model->type_id,'id' => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->render('//realty/'.$view['folder'].'/admin/update', [
                 'model' => $model,
             ]);
         }
