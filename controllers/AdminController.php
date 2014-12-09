@@ -73,8 +73,14 @@ class AdminController extends Controller
         else
         {
             $realty = Realty::findOne($id);
+            if($realty === null)
+                throw new NotFoundHttpException('Объект не найден');
+
+            $images = File::find()->where(['realty_id' => $realty->id])->all();
+
             return $this->render('//realty/'.$model['folder'].'/admin/view',[
-                'model' => $realty
+                'model' => $realty,
+                'images'=> $images
             ]);
         }
     }
