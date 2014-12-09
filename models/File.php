@@ -60,4 +60,9 @@ class File extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Realty::className(), ['id' => 'realty_id']);
     }
+
+    public function prepareCarousel()
+    {
+        return Yii::$app->formatter->asImage('@web/'.$this->path);
+    }
 }

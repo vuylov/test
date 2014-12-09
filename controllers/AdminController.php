@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 use app\models\File;
+use Imagine\Image\ManipulatorInterface;
 use Yii;
 use app\models\Realty;
 use app\models\RealtySearch;
@@ -13,6 +14,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\Status;
 use yii\web\UploadedFile;
+use yii\imagine\Image;
+
 
 /**
  * AdminController implements the CRUD actions for Realty model.
@@ -109,15 +112,20 @@ class AdminController extends Controller
             {
                 $randomName = Yii::$app->getSecurity()->generateRandomString(10);
 
+
+
                 $dbFile = new File();
                 $dbFile->realty_id = $model->id;
                 $dbFile->name       = $file->baseName;
                 $dbFile->path       = 'upload/'.$randomName.'.'.$file->extension;
+                $dbFile->thumbnail  = 'upload/tmb-'.$randomName.'.'.$file->extension;
                 $dbFile->extension  = $file->extension;
                 $dbFile->setAttribute('create_time', new Expression('CURRENT_TIMESTAMP'));
                 $dbFile->save();
 
                 $file->saveAs($dbFile->path);
+                $thumbnail = Image::thumbnail($dbFile->path, 400, 300, ManipulatorInterface::THUMBNAIL_INSET);
+                $thumbnail->save(Yii::getAlias('@webroot').'/'.$dbFile->thumbnail);
             }
             return $this->redirect(['view', 'type' => $type,'id' => $model->id]);
         } else {
@@ -178,5 +186,10 @@ class AdminController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionTest()
+    {
+        var_dump(phpversion("imagick"));
     }
 }

@@ -5,6 +5,7 @@
  * @var $form yii\widgets\ActiveForm
  */
 use yii\widgets\DetailView;
+use yii\bootstrap\Carousel;
 use yii\helpers\Html;
 use app\models\Role;
 use app\models\Status;
@@ -35,10 +36,11 @@ use app\models\Status;
         ]
     ]);?>
     <?php if($images !== null):?>
-        <div class="app-images">
             <?php foreach($images as $image):?>
-                <?=Yii::$app->formatter->asImage('/'.$image->path, ['title' => $image->name, 'alt' => $image->name]);?>
+                <?php $items[] = Yii::$app->formatter->asImage('@web/'.$image->path, ['title' => $image->name, 'alt' => $image->name]);?>
             <?php endforeach;?>
-        </div>
+            <?=Carousel::widget([
+            'items' => $items
+        ]);?>
     <?php endif;?>
 </div>
