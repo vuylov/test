@@ -224,6 +224,23 @@ class Realty extends ActiveRecord
         return $this->hasOne(Commercetype::className(), ['id' => 'commercetype_id']);
     }
 
+    /**
+     * @return \yii\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id'   => 'category_id']);
+    }
+
+    /**
+     * @return \yii\ActiveQuery
+     */
+    public function getFiles()
+    {
+        return $this->hasMany(File::className(), ['realty_id' => 'id']);
+    }
+
+
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert)){
