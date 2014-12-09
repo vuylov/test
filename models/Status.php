@@ -12,4 +12,16 @@ namespace app\models;
 class Status {
     CONST ACTIVE = 1;
     CONST DEACTIVE = 0;
+
+    public static function getStatus($status)
+    {
+        switch($status){
+            case 1:
+                return 'Активный';
+                break;
+            case 0:
+                return 'Неактивный';
+                break;
+        }
+    }
 } 
