@@ -83,4 +83,15 @@ class File extends \yii\db\ActiveRecord
             $thumbnail->save(Yii::getAlias('@webroot').'/'.$dbFile->thumbnail);
         }
     }
+
+    public static function deleteImagesByModel(Realty $model)
+    {
+        $files = File::find()->where(['realty_id' => $model->id])->all();
+        foreach($files as $file)
+        {
+            unlink(Yii::getAlias('@webroot').'/'.$file->path);
+            unlink(Yii::getAlias('@webroot').'/'.$file->thumbnail);
+            $file->delete();
+        }
+    }
 }
