@@ -10,7 +10,10 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use app\models\File;
+use yii\web\NotFoundHttpException;
 
 class FileController extends Controller{
 
@@ -31,8 +34,16 @@ class FileController extends Controller{
 
     public function actionDelete($id = null, $model = null)
     {
+        if(is_null($id) && is_null($model))
+            throw new NotFoundHttpException('Ошибка при удалении файла');
+
         $file = File::findOne($id);
-        $file->delete();
+
+        if($file !== null){
+            $file->delete();
+            unlink(Yii::getAlias('@webroot').'/'.$file->path);
+            unlink(Yii::getAlias('@webroot').'/'.$file->thumbnail);
+        }
         return $this->redirect(['admin/update', 'id' => $model]);
     }
 } 
