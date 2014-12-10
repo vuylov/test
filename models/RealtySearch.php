@@ -77,8 +77,15 @@ class RealtySearch extends Realty
         $query = Realty::find();
         $query->where([
             'type_id'   => $type,
-            'status'    => $active
+            //'status'    => $active
         ]);
+
+        if(Yii::$app->user->identity->role_id !== Role::ADMIN)
+        {
+            $query->andWhere([
+                'status'    => $active
+            ]);
+        }
 
         if(Yii::$app->user->identity->role_id == Role::REALTOR)
             $query->andWhere([
