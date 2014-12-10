@@ -95,3 +95,12 @@ div.item{
 div.item-description{
     display: inline;
 }
+div.image-item{
+    position: relative;
+    display: inline-block;
+}
+a.delete-image{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
