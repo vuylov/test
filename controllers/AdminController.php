@@ -3,15 +3,18 @@
 namespace app\controllers;
 use app\models\File;
 use Yii;
-use app\models\Realty;
-use app\models\RealtySearch;
 use yii\helpers\VarDumper;
+use yii\rbac\Role;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\Status;
 use yii\web\UploadedFile;
+use app\models\Realty;
+use app\models\RealtySearch;
+use app\models\Role as URole;
+use yii\db\Expression;
 
 /**
  * AdminController implements the CRUD actions for Realty model.
@@ -34,7 +37,7 @@ class AdminController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['get'],
                 ],
             ],
         ];
@@ -52,6 +55,7 @@ class AdminController extends Controller
     /**
      * Displays a single Realty model.
      * @param integer $id
+     * @throws
      * @return mixed
      */
     public function actionView($type = null, $id = null)
@@ -150,8 +154,18 @@ class AdminController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
 
+        $model = $this->findModel($id);
+
+        if(Yii::$app->user->identity->role_id == URole::ADMIN){
+            File::deleteImagesByModel($model);
+            $model->delete();
+        }
+        elseif(Yii::$app->user->identity->role_id == URole::REALTOR){
+            $model->status          = Status::DEACTIVE;
+            $model->deactivate_time = new Expression('CURRENT_TIMESTAMP');
+            $model->save(false);
+        }
         return $this->redirect(['index']);
     }
 
@@ -169,10 +183,5 @@ class AdminController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionTest()
-    {
-        var_dump(phpversion("imagick"));
     }
 }
