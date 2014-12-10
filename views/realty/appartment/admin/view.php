@@ -33,6 +33,7 @@ use app\models\Status;
                 '',*/
             ['label' => 'Информация о владельце', 'value' => ($model->owner)?$model->owner: 'Нет информации'],
             ['label' => 'Дата создания', 'value' => Yii::$app->formatter->asDatetime($model->create_time, 'MM/dd/yyyy HH:mm:ss')],
+            ['label' => 'Цена', 'value' => ($model->price)?$model->price:'Нет информации']
         ]
     ]);?>
     <?php if($images !== null):?>

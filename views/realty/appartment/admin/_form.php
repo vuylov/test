@@ -12,7 +12,6 @@ use kartik\file\FileInput;
 use app\models\Role;
 use app\models\User;
 use app\models\Status;
-use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Realty */
@@ -96,7 +95,10 @@ use dosamigos\fileupload\FileUploadUI;
         <?=Html::label('Загруженные изображения квартиры');?>
         <div>
             <?php foreach($file as $f):?>
-                <?=Html::img('@web/'.$f->thumbnail, ['class' => 'file-preview-image', 'alt' => $f->name]);?>
+                <div class="image-item">
+                    <?=Html::img('@web/'.$f->thumbnail, ['id' => 'file-'.$f->id,'class' => 'file-preview-image', 'alt' => $f->name, 'data' => $f->id]);?>
+                    <?=Html::a('Удалить', ['file/delete', 'id' => $f->id, 'model'=> $model->id], ['class' => 'btn btn-danger delete-image']);?>
+                </div>
             <?php endforeach;?>
         </div>
     <?php endif;?>
