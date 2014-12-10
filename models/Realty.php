@@ -109,7 +109,7 @@ class Realty extends ActiveRecord
             [['type_id', 'region_id', 'price', 'address', 'detail', 'owner'], 'required', 'message' => 'Данное поле обязательно для заполненния'],
             [['type_id', 'user_id', 'region_id', 'builder_id', 'room_id', 'layout_id', 'housetype_id', 'category_id','furnish_id','earthtype_id','commercetype_id', 'price', 'status', 'square', 'square_plot'], 'integer', 'message' => 'Данное поле может быть только числовым'],
             [['detail'], 'string'],
-            [['file'], 'file', 'maxFiles' => 5],
+            [['file'], 'file', 'maxFiles' => 5, 'message' => 'Вы можете добавить не больше 5 изображений'],
             [['create_time', 'deactivate_time'], 'safe'],
             [['square', 'square_plot', 'address', 'owner'], 'string', 'max' => 255]
         ];
