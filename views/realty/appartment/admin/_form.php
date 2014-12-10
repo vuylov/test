@@ -12,15 +12,21 @@ use kartik\file\FileInput;
 use app\models\Role;
 use app\models\User;
 use app\models\Status;
+use dosamigos\fileupload\FileUploadUI;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Realty */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <div class="appartment-form">
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'enctype'   => 'multipart/form-data',
+            //'class'     => 'form-inline'
+        ],
+    ]);?>
 
-    <?php if(Yii::$app->user->identity->role_id == Role::ADMIN):?>
+    <?php if(Yii::$app->user->identity->role_id == Role::ADMIN && !$model->isNewRecord):?>
 
         <?= $form->field($model, 'user_id')->dropDownList(
             ArrayHelper::map(User::find()->all(), 'id', 'fullname'),
@@ -86,13 +92,34 @@ use app\models\Status;
 
     <?= $form->field($model, 'price')->textInput(['placeholder'  => 'Цена должна быть числом']);?>
 
-    <?= $form->field($model, 'file[]')->widget(FileInput::classname(),[
-        'options'       => ['accept' => 'image/*', 'multiple' => true],
-        'pluginOptions' => ['showUpload' => false, 'browseLabel' => 'Обзор','removeLabel' => 'Удалить']
-    ]);?>
+    <?php if(!$model->isNewRecord && count($file) > 0):?>
+        <?=Html::label('Загруженные изображения квартиры');?>
+        <div>
+            <?php foreach($file as $f):?>
+                <?=Html::img('@web/'.$f->thumbnail, ['class' => 'file-preview-image', 'alt' => $f->name]);?>
+            <?php endforeach;?>
+        </div>
+    <?php endif;?>
 
+    <?php echo $form->field($model, 'file[]')->widget(FileInput::classname(),[
+        'options'       => [
+            'accept' => 'image/*',
+            'multiple' => true
+        ],
+        'pluginOptions' => [
+            'showUpload'        => false,
+            'browseLabel'       => 'Обзор',
+            'removeLabel'       => 'Удалить',
+            'overwriteInitial'  => true,
+        ],
+    ]);
+    ?>
+
+    <div class="clearfix"></div>
     <div class="pull-right">
         <?= Html::submitButton(($model->isNewRecord)?"Добавить":"Обновить", ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Отмена', ['admin/index'], ['class' => 'btn btn-primary']);?>
+
     </div>
     <?php ActiveForm::end();?>
 </div>
