@@ -61,8 +61,24 @@ class File extends \yii\db\ActiveRecord
         return $this->hasOne(Realty::className(), ['id' => 'realty_id']);
     }
 
-    public function prepareCarousel()
+
+    public static function SaveImagesWithThumbnails(array $files, $model)
     {
-        return Yii::$app->formatter->asImage('@web/'.$this->path);
+        foreach($files as $file)
+        {
+            $dbFile = new File();
+            $randomName = Yii::$app->getSecurity()->generateRandomString(10);
+            $dbFile->realty_id = $model->id;
+            $dbFile->name       = $file->baseName;
+            $dbFile->path       = 'upload/'.$randomName.'.'.$file->extension;
+            $dbFile->thumbnail  = 'upload/tmb-'.$randomName.'.'.$file->extension;
+            $dbFile->extension  = $file->extension;
+            $dbFile->setAttribute('create_time', new Expression('CURRENT_TIMESTAMP'));
+            $dbFile->save();
+
+            $file->saveAs($dbFile->path);
+            $thumbnail = Image::thumbnail($dbFile->path, 400, 300, ManipulatorInterface::THUMBNAIL_INSET);
+            $thumbnail->save(Yii::getAlias('@webroot').'/'.$dbFile->thumbnail);
+        }
     }
 }
