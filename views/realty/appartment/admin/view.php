@@ -10,9 +10,6 @@ use yii\helpers\Html;
 use app\models\Role;
 use app\models\Status;
 ?>
-<div class="pull-right">
-    <?= Html::a('Редактировать', ['admin/update', 'id' => $model->id], ['class' => 'btn btn-success']);?>
-</div>
 <div class="view-form">
     <?php echo DetailView::widget([
         'model'         => $model,
@@ -33,7 +30,8 @@ use app\models\Status;
                 '',*/
             ['label' => 'Информация о владельце', 'value' => ($model->owner)?$model->owner: 'Нет информации'],
             ['label' => 'Дата создания', 'value' => Yii::$app->formatter->asDatetime($model->create_time, 'MM/dd/yyyy HH:mm:ss')],
-            ['label' => 'Цена', 'value' => ($model->price)?$model->price:'Нет информации']
+            ['label' => 'Цена', 'value' => ($model->price)?$model->price:'Нет информации'],
+            ['label' => 'Добавил', 'value' => $model->user->fullname],
         ]
     ]);?>
     <?php if($images !== null):?>
@@ -44,4 +42,8 @@ use app\models\Status;
             'items' => $items
         ]);?>
     <?php endif;?>
+    <div class="pull-right">
+        <?= Html::a('Редактировать', ['admin/update', 'id' => $model->id], ['class' => 'btn btn-success']);?>
+        <?= Html::a('Удалить', ['admin/delete', 'id' => $model->id], ['class' => 'btn btn-danger']);?>
+    </div>
 </div>

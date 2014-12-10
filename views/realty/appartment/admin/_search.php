@@ -10,6 +10,7 @@ use app\models\Layout;
 use app\models\Furnish;
 use app\models\User;
 use app\models\Role;
+use app\models\Status;
 ?>
 <div class="app-filter">
     <?php $form = ActiveForm::begin([
@@ -26,6 +27,10 @@ use app\models\Role;
             'prompt'    => 'Все риэлторы'
         ]
     );?>
+        <?= $form->field($model, 'status')->dropDownList(
+            [Status::ACTIVE => 'Активный', Status::DEACTIVE => 'Неактивный'],
+            ['prompt' => 'Выберите статус']
+        );?>
     <?php endif;?>
 
     <?= $form->field($model, 'region_id')->dropDownList(
