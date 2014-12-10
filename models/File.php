@@ -3,7 +3,9 @@
 namespace app\models;
 
 use Yii;
-
+use yii\db\Expression;
+use yii\imagine\Image;
+use Imagine\Image\ManipulatorInterface;
 /**
  * This is the model class for table "file".
  *
@@ -35,7 +37,7 @@ class File extends \yii\db\ActiveRecord
             [['realty_id'], 'integer'],
             [['create_time'], 'safe'],
             [['name'], 'string', 'max' => 255],
-            [['extension'], 'string', 'max' => 5]
+            [['extension'], 'string', 'max' => 5, 'message' => 'Вы можете добавить не больше 5 изображений']
         ];
     }
 
