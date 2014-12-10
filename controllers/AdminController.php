@@ -16,7 +16,6 @@ use app\models\Status;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 
-
 /**
  * AdminController implements the CRUD actions for Realty model.
  */
@@ -107,26 +106,8 @@ class AdminController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $files = UploadedFile::getInstances($model, 'file');
+            File::SaveImagesWithThumbnails($files, $model);
 
-            foreach($files as $file)
-            {
-                $randomName = Yii::$app->getSecurity()->generateRandomString(10);
-
-
-
-                $dbFile = new File();
-                $dbFile->realty_id = $model->id;
-                $dbFile->name       = $file->baseName;
-                $dbFile->path       = 'upload/'.$randomName.'.'.$file->extension;
-                $dbFile->thumbnail  = 'upload/tmb-'.$randomName.'.'.$file->extension;
-                $dbFile->extension  = $file->extension;
-                $dbFile->setAttribute('create_time', new Expression('CURRENT_TIMESTAMP'));
-                $dbFile->save();
-
-                $file->saveAs($dbFile->path);
-                $thumbnail = Image::thumbnail($dbFile->path, 400, 300, ManipulatorInterface::THUMBNAIL_INSET);
-                $thumbnail->save(Yii::getAlias('@webroot').'/'.$dbFile->thumbnail);
-            }
             return $this->redirect(['view', 'type' => $type,'id' => $model->id]);
         } else {
             return $this->render('//realty/'.$modelView['folder'].'/admin/create', [
@@ -145,16 +126,19 @@ class AdminController extends Controller
     {
         $model  = $this->findModel($id);
         $view   = Realty::getInstanceType($model->type_id);
-
+        $file   = File::find()->where(['realty_id' => $model->id])->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //TODO: update files HERE
 
+            $files = UploadedFile::getInstances($model, 'file');
+            //if()
+            File::SaveImagesWithThumbnails($files, $model);
 
             return $this->redirect(['view', 'type' => $model->type_id,'id' => $model->id]);
         } else {
             return $this->render('//realty/'.$view['folder'].'/admin/update', [
                 'model' => $model,
+                'file'  => $file
             ]);
         }
     }
