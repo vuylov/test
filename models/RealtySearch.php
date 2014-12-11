@@ -93,7 +93,10 @@ class RealtySearch extends Realty
             ]);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'     => $query,
+            'pagination'=> [
+                'pageSize'  => 3
+            ]
         ]);
 
         if (!($this->load($params) && $this->validate())) {
