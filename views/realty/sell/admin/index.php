@@ -1,12 +1,19 @@
-<h2>Квартиры</h2>
-<div class="apps">
-    <?php if(count($objects) > 0):?>
-        <?php foreach($objects as $objects):?>
-            <div class="app">
-                <div></div>
-            </div>
-        <?php endforeach;?>
-    <?php else:?>
-        <div>Предложений нет</div>
-    <?php endif;?>
+<?php
+use yii\helpers\Html;
+use yii\widgets\ListView;
+?>
+<h2>Продажа коммерческой недвижимости</h2>
+<?php echo $this->render('_search', ['model' => $searchModel, 'type' => $type]); ?>
+<div class="pull-right">
+    <?=Html::a('Добавить недвижимость', ['create', 'type' => $type], ['class' => 'btn btn-success']); ?>
+</div>
+<hr>
+<div class="app=list">
+    <?= ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemOptions' => ['class' => 'item'],
+        'itemView' => function ($model, $key, $index, $widget) use ($type){
+            return Html::a(Html::encode($model->address), ['view', 'type' => $type,'id' => $model->id]);
+        },
+    ]) ?>
 </div>
