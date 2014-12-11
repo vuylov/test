@@ -57,8 +57,8 @@ class RealtySearch extends Realty
             'afterPrice'    => 'Цена до',
             'earthtype_id'  => 'Тип назначения',
             'commercetype_id'=> 'Тип коммерческой недвжимиости',
-            'user_id'       => 'Недвижимость добавил'
-
+            'user_id'       => 'Недвижимость добавил',
+            'status'        => 'Активность объекта'
         ];
     }
 
@@ -92,10 +92,12 @@ class RealtySearch extends Realty
                 'user_id'   => Yii::$app->user->id
             ]);
 
+        $query->addOrderBy('create_time');
+
         $dataProvider = new ActiveDataProvider([
             'query'     => $query,
             'pagination'=> [
-                'pageSize'  => 3
+                'pageSize'  => Yii::$app->params['countItemPage']
             ]
         ]);
 

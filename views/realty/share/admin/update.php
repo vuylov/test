@@ -6,7 +6,7 @@ use kartik\file\FileInputAsset;
 /* @var $this yii\web\View */
 /* @var $model app\models\Realty */
 
-$this->title = 'Редактирование информации о квартире: ' . ' #' . $model->id;
+$this->title = 'Редактирование информации о подселении: ' . ' #' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Realties', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

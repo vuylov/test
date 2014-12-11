@@ -124,7 +124,7 @@ class Realty extends ActiveRecord
             'id' => 'ID',
             'type_id' => 'Тип недвижимости',
             'user_id' => 'Пользователь системы',
-            'region_id' => 'Регион',
+            'region_id' => 'Район',
             'builder_id' => 'Застройщик',
             'room_id' => 'Количество комнат',
             'layout_id' => 'Планировка',
@@ -140,7 +140,9 @@ class Realty extends ActiveRecord
             'deactivate_time' => 'Дата скрытия',
             'furnish_id'    => 'Тип отделки',
             'category_id'   => 'Тип постройки',
-            'file'          => 'Изображение для загрузки'
+            'file'          => 'Изображение для загрузки',
+            'earthtype_id'  => 'Назначение',
+            'commercetype_id'=> 'Тип коммерческой недвжимиости',
         ];
     }
 

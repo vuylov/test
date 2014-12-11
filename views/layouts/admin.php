@@ -53,20 +53,20 @@ AppAsset::register($this);
     ?>
     <div class="container menu">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <?= $content ?>
             </div>
-            <div class="col-md-4">
-                <ul>
-                    <li>Мои объекты недвижимости</li>
-                    <li><?=Html::a("Квартиры", ['admin/view', 'type'=>1]);?></li>
-                    <li><?=Html::a("Аренда жилья", ['admin/view', 'type'=>2]);?></li>
-                    <li><?=Html::a("Подселения", ['admin/view', 'type'=>3]);?></li>
-                    <li><?=Html::a("Дома, коттеджи, таунхаусы, дачи", ['admin/view', 'type'=>4]);?></li>
-                    <li><?=Html::a("Земельные участки", ['admin/view', 'type'=>6]);?></li>
-                    <li><?=Html::a("Гаражи, парковки", ['admin/view', 'type'=>7]);?></li>
-                    <li><?=Html::a("Продажа", ['admin/view', 'type'=>8]);?></li>
-                    <li><?=Html::a("Аренда", ['admin/view', 'type'=>9]);?></li>
+            <div class="col-md-3">
+                <h4>Мои объекты недвижимости</h4>
+                <ul class="list-group">
+                    <li class="list-group-item"><?=Html::a("Квартиры", ['admin/view', 'type'=>1]);?></li>
+                    <li class="list-group-item"><?=Html::a("Аренда жилья", ['admin/view', 'type'=>2]);?></li>
+                    <li class="list-group-item"><?=Html::a("Подселения", ['admin/view', 'type'=>3]);?></li>
+                    <li class="list-group-item"><?=Html::a("Дома, коттеджи, таунхаусы, дачи", ['admin/view', 'type'=>4]);?></li>
+                    <li class="list-group-item"><?=Html::a("Земельные участки", ['admin/view', 'type'=>6]);?></li>
+                    <li class="list-group-item"><?=Html::a("Гаражи, парковки", ['admin/view', 'type'=>7]);?></li>
+                    <li class="list-group-item"><?=Html::a("Продажа", ['admin/view', 'type'=>8]);?></li>
+                    <li class="list-group-item"><?=Html::a("Аренда", ['admin/view', 'type'=>9]);?></li>
                 </ul>
             </div>
 
