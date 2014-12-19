@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "builder".
  *
@@ -13,7 +13,7 @@ use Yii;
  *
  * @property Realty[] $realties
  */
-class Builder extends \yii\db\ActiveRecord
+class Builder extends ActiveRecord
 {
     /**
      * @inheritdoc

@@ -1,0 +1,49 @@
+div.column{
+    padding-top: 70px;
+    width: 48.0%;
+}
+div.column ul {
+    list-style: none;
+    padding: 0;
+}
+div.live-realty{
+    background: url('../img/left-arrow.jpg') no-repeat top right;
+    float: left;
+    text-align: right;
+}
+div.commerce-realty{
+    background: url('../img/right-arrow.jpg') no-repeat top left;
+    float:right;
+}
+a{
+    color: #ffae00;
+}
+.new-offers-container h4{
+    text-transform: uppercase;
+    text-align: center;
+}
+.offers{
+    list-style: none;
+    padding: 0;
+    text-align: center;
+ }
+.offers li{
+    display: inline-block;
+    padding-left: 10px;
+}
+.offers li div{
+    text-align: right;
+}
+div.img-container{
+    position: relative;
+}
+.realty-price{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 5px;
+    background-color: #ffae00;
+    width: 60%;
+    text-align: right;
+    font-weight: bold;
+}

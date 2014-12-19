@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "kartik-v/yii2-widget-fileinput": "*",
         "yiisoft/yii2-imagine":"*",
-        "2amigos/yii2-file-upload-widget": "*"
+        "2amigos/yii2-file-upload-widget": "*",
+        "drmabuse/yii2-slick-carousel": "*"
 
     },
     "require-dev": {

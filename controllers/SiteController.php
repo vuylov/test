@@ -50,7 +50,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        VarDumper::dump(Yii::$app->user->identity, 10, true);
+        //VarDumper::dump(Yii::$app->user->identity, 10, true);
         return $this->render('index');
     }
 

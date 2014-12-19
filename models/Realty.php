@@ -2,10 +2,12 @@
 
 namespace app\models;
 
+use Faker\Provider\File;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\web\HttpException;
+use app\models\File as myFile;
 
 /**
  * This is the model class for table "realty".
@@ -239,7 +241,7 @@ class Realty extends ActiveRecord
      */
     public function getFiles()
     {
-        return $this->hasMany(File::className(), ['realty_id' => 'id']);
+        return $this->hasMany(myFile::className(), ['realty_id' => 'id']);
     }
 
 
@@ -254,5 +256,18 @@ class Realty extends ActiveRecord
             return true;
         }
         return false;
+    }
+
+    public function getRandomImg()
+    {
+        if(count($this->files) > 0){
+            $files  = $this->files;
+            $key    = array_rand($files, 1);
+            $img    = $files[$key];
+            return Yii::getAlias('@web').'/'.$img->thumbnail;
+        }
+        else{
+            return Yii::getAlias('@web').Yii::$app->params['realty_default_image'];
+        }
     }
 }
