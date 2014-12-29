@@ -93,9 +93,6 @@ a.desc:after {
 div.item{
     margin-bottom: 5px;
 }
-div.item-description{
-    display: inline;
-}
 div.image-item{
     position: relative;
     display: inline-block;

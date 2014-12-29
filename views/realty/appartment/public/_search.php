@@ -15,61 +15,77 @@ use app\models\Furnish;
         'method' => 'get',
         'enableAjaxValidation'      => false,
         'enableClientValidation'    => false,
+        'options'   => [
+            'class' => 'search-box'
+        ]
     ]); ?>
-
-    <?= $form->field($model, 'region_id')->dropDownList(
-        ArrayHelper::map(Region::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Все районы'
-        ]
-    ); ?>
-
-    <?= $form->field($model, 'builder_id')->dropDownList(
-        ArrayHelper::map(Builder::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Любой застройщик'
-        ]
-    ); ?>
-
-    <?php echo $form->field($model, 'room_id')->dropDownList(
-        ArrayHelper::map(Room::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Любое количество комнат'
-        ]
-    ); ?>
-
-    <?php echo $form->field($model, 'category_id')->dropDownList(
-        ArrayHelper::map(Category::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Все виды строений'
-        ]
-    );?>
-    <?php echo $form->field($model, 'layout_id')->dropDownList(
-        ArrayHelper::map(Layout::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Все виды планировок'
-        ]
-    ); ?>
-
-    <?php echo $form->field($model, 'furnish_id')->dropDownList(
-        ArrayHelper::map(Furnish::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Любая отделка'
-        ]
-    );?>
-
-    <?php echo $form->field($model, 'address') ?>
-
-    <?php echo $form->field($model, 'beforePrice');?>
-
-    <?php echo $form->field($model, 'afterPrice');?>
-
-    <?php echo Html::hiddenInput('type', $type);?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Сбросить', ['class' => 'btn btn-default']) ?>
-    </div>
-
+    <table class="table search-filter">
+        <tr>
+            <td>
+                <?= $form->field($model, 'region_id')->dropDownList(
+                    ArrayHelper::map(Region::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Все районы',
+                    ]
+                ); ?>
+            </td>
+            <td>
+                <?= $form->field($model, 'builder_id')->dropDownList(
+                    ArrayHelper::map(Builder::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Любой застройщик',
+                    ]
+                ); ?>
+            </td>
+            <td>
+                <?php echo $form->field($model, 'room_id')->dropDownList(
+                    ArrayHelper::map(Room::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Любое количество комнат'
+                    ]
+                ); ?>
+            </td>
+            <td>
+                <?php echo $form->field($model, 'category_id')->dropDownList(
+                    ArrayHelper::map(Category::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Все виды строений'
+                    ]
+                );?>
+            </td>
+            <td> <?php echo $form->field($model, 'layout_id')->dropDownList(
+                    ArrayHelper::map(Layout::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Все виды планировок'
+                    ]
+                ); ?></td>
+        </tr>
+        <tr>
+            <td>
+                <?php echo $form->field($model, 'furnish_id')->dropDownList(
+                    ArrayHelper::map(Furnish::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Любая отделка'
+                    ]
+                );?>
+            </td>
+            <td>
+                <?php echo $form->field($model, 'address') ?>
+            </td>
+            <td>
+                <?php echo $form->field($model, 'beforePrice');?>
+            </td>
+            <td><?php echo $form->field($model, 'afterPrice');?></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="5"><?php echo Html::hiddenInput('type', $type);?>
+                <div class="form-group pull-right">
+                    <?= Html::submitButton('Поиск', ['class' => 'btn btn-warning']) ?>
+                    <?= Html::resetButton('Сбросить', ['class' => 'btn btn-default']) ?>
+                </div>
+            </td>
+        </tr>
     <?php ActiveForm::end(); ?>
+    </table>
 </div>

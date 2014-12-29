@@ -18,7 +18,8 @@ use app\components\NewOffer;
 <div class = "new-offers-container">
     <h4>Новые предложения</h4>
     <?=NewOffer::widget([
-        'count' => 5
+        'count' => 5,
+        'mode'  => NewOffer::MODE_LAST
     ]);?>
 </div>
 <?php

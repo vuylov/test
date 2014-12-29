@@ -74,7 +74,7 @@ class RealtySearch extends Realty
     public function search($params, $type, $active = Status::ACTIVE)
     {
 
-        $query = Realty::find();
+        $query = Realty::find()->with(['region', 'room', 'layout', 'furnish', 'builder']);
         $query->where([
             'type_id'   => $type,
             //'status'    => $active
@@ -98,7 +98,8 @@ class RealtySearch extends Realty
             'query'     => $query,
             'pagination'=> [
                 'pageSize'  => Yii::$app->params['countItemPage']
-            ]
+            ],
+            'sort'  => ['defaultOrder' => ['create_time' => SORT_ASC]]
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -130,7 +131,15 @@ class RealtySearch extends Realty
             ->andFilterWhere(['like', 'detail', $this->detail])
             ->andFilterWhere(['like', 'owner', $this->owner]);
 
-        $query->andFilterWhere(['between', 'price', $this->beforePrice, $this->afterPrice]);
+        if($this->beforePrice && $this->afterPrice){
+            $query->andFilterWhere(['between', 'price', $this->beforePrice, $this->afterPrice]);
+        }
+        elseif($this->beforePrice){
+            $query->andFilterWhere(['>=', 'price', $this->beforePrice]);
+        }
+        elseif($this->afterPrice){
+            $query->andFilterWhere(['<=', 'price', $this->afterPrice]);
+        }
 
         return $dataProvider;
     }

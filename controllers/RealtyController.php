@@ -42,7 +42,7 @@ class RealtyController extends Controller{
             ]);
         }
         else {//просмотр объекта в разрезе типа
-            $object = $model['class']::findOne($id);
+            $object = Realty::find()->with(['files', 'layout', 'furnish'])->where(['id' => $id])->one();
             return $this->render($model['folder'].'/public/view', [
                 'object'    => $object,
                 'type'      => $type,
