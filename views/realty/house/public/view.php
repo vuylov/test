@@ -37,7 +37,7 @@ use metalguardian\fotorama\Fotorama;
                 <div class="detail-title">Описание</div>
                 <div class="detail-text"><?=$object->detail;?></div>
                 <div class="detail-title">Адрес</div>
-                <div class="detail-text"><?=$object->address;?></div>
+                <div class="detail-text"><?=$object->region->name.' р-н, '.$object->address;?></div>
                 <div class="detail-extra">
                     <table class="detail-extra-table">
                         <tr><td>Тип:</td><td><?=$object->housetype->name;?></td></tr>

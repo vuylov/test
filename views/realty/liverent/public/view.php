@@ -37,7 +37,7 @@ use app\components\NewOffer;
                 <div class="detail-title">Описание</div>
                 <div class="detail-text"><?=$object->detail;?></div>
                 <div class="detail-title">Адрес</div>
-                <div class="detail-text"><?=$object->address;?></div>
+                <div class="detail-text"><?=$object->region->name.' р-н, '.$object->address;?></div>
                 <div class="detail-extra">
                     <table class="detail-extra-table">
                         <tr><td>Кол-во комнат:</td><td><?=$object->room->name;?></td></tr>
