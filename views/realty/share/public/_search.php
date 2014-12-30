@@ -15,40 +15,58 @@ use app\models\Furnish;
         'method' => 'get',
         'enableAjaxValidation'      => false,
         'enableClientValidation'    => false,
+        'options'   => [
+            'class' => 'search-box'
+        ]
     ]); ?>
+    <table class="table search-filter">
+        <tr>
+            <td>
+                <?= $form->field($model, 'region_id')->dropDownList(
+                    ArrayHelper::map(Region::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Все районы'
+                    ]
+                ); ?>
+            </td>
+            <td>
+                <?php echo $form->field($model, 'room_id')->dropDownList(
+                    ArrayHelper::map(Room::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Любое количество комнат'
+                    ]
+                ); ?>
+            </td>
+            <td>
+                <?php echo $form->field($model, 'furnish_id')->dropDownList(
+                    ArrayHelper::map(Furnish::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Любая отделка'
+                    ]
+                );?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php echo $form->field($model, 'address') ?>
+            </td>
+            <td>
+                <?php echo $form->field($model, 'beforePrice');?>
+            </td>
+            <td>
+                <?php echo $form->field($model, 'afterPrice');?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <?php echo Html::hiddenInput('type', $type);?>
 
-    <?= $form->field($model, 'region_id')->dropDownList(
-        ArrayHelper::map(Region::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Все районы'
-        ]
-    ); ?>
-
-    <?php echo $form->field($model, 'room_id')->dropDownList(
-        ArrayHelper::map(Room::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Любое количество комнат'
-        ]
-    ); ?>
-
-    <?php echo $form->field($model, 'furnish_id')->dropDownList(
-        ArrayHelper::map(Furnish::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Любая отделка'
-        ]
-    );?>
-    <?php echo $form->field($model, 'address') ?>
-
-    <?php echo $form->field($model, 'beforePrice');?>
-
-    <?php echo $form->field($model, 'afterPrice');?>
-
-    <?php echo Html::hiddenInput('type', $type);?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Сбросить', ['class' => 'btn btn-default']) ?>
-    </div>
-
+                <div class="form-group pull-right">
+                    <?= Html::submitButton('Поиск', ['class' => 'btn btn-warning']) ?>
+                    <?= Html::resetButton('Сбросить', ['class' => 'btn btn-default']) ?>
+                </div>
+            </td>
+        </tr>
+    </table>
     <?php ActiveForm::end(); ?>
 </div>
