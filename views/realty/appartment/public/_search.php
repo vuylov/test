@@ -19,7 +19,7 @@ use app\models\Furnish;
             'class' => 'search-box'
         ]
     ]); ?>
-    <table class="table search-filter">
+    <table class="table search-filter table-responsive">
         <tr>
             <td>
                 <?= $form->field($model, 'region_id')->dropDownList(

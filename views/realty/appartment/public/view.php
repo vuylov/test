@@ -17,7 +17,7 @@ use metalguardian\fotorama\Fotorama;
                     'loop' => true,
                     'hash' => true,
                     'allowfullscreen' => true,
-                    'autoplay' => true,
+                    'autoplay' => "5000",
                 ],
                 'tagName' => 'span',
                 'useHtmlData' => false,
