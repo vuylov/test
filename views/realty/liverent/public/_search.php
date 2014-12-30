@@ -14,25 +14,31 @@ use app\models\Layout;
         'method' => 'get',
         'enableAjaxValidation'      => false,
         'enableClientValidation'    => false,
-    ]); ?>
-
-    <?= $form->field($model, 'region_id')->dropDownList(
-        ArrayHelper::map(Region::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Все районы'
+        'options'   => [
+            'class' => 'search-box'
         ]
-    ); ?>
+    ]); ?>
+    <table class="table search-filter">
+        <tr>
+            <td> <?= $form->field($model, 'region_id')->dropDownList(
+                    ArrayHelper::map(Region::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Все районы'
+                    ]
+                ); ?></td>
+            <td><?php echo $form->field($model, 'beforePrice');?></td>
+            <td><?php echo $form->field($model, 'afterPrice');?></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <?php echo Html::hiddenInput('type', $type);?>
 
-    <?php echo $form->field($model, 'beforePrice');?>
-
-    <?php echo $form->field($model, 'afterPrice');?>
-
-    <?php echo Html::hiddenInput('type', $type);?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Сбросить', ['class' => 'btn btn-default']) ?>
-    </div>
-
+                <div class="form-group pull-right">
+                    <?= Html::submitButton('Поиск', ['class' => 'btn btn-warning']) ?>
+                    <?= Html::resetButton('Сбросить', ['class' => 'btn btn-default']) ?>
+                </div>
+            </td>
+        </tr>
+    </table>
     <?php ActiveForm::end(); ?>
 </div>
