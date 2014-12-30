@@ -1,8 +1,6 @@
 <?php
-
 use app\components\NewOffer;
 use metalguardian\fotorama\Fotorama;
-//VarDumper::dump($object, 10 ,true);
 ?>
 <h1 class="part-title">Квартиры</h1>
 <?php echo $this->render('_search', ['model' => $model, 'type' => $type]); ?>
