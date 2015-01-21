@@ -62,8 +62,6 @@ AppAsset::register($this);
                 <li><?=Html::a("Дома, коттеджи, таунхаусы, дачи", ['realty/view', 'type'=>4]);?></li>
                 <li><?=Html::a("Земельные участки", ['realty/view', 'type'=>6]);?></li>
                 <li><?=Html::a("Гаражи, парковки", ['realty/view', 'type'=>7]);?></li>
-                <li><?=Html::a("Продажа", ['realty/view', 'type'=>8]);?></li>
-                <li><?=Html::a("Аренда", ['realty/view', 'type'=>9]);?></li>
             </ul>
         </div>
         <div class="column commerce-realty">
