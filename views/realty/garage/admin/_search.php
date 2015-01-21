@@ -11,7 +11,7 @@ use app\models\Furnish;*/
 use app\models\User;
 use app\models\Role;
 use app\models\Status;
-use app\models\Earthtype;
+use app\models\Garagetype;
 ?>
 <div class="app-filter">
     <?php $form = ActiveForm::begin([
@@ -41,6 +41,10 @@ use app\models\Earthtype;
         ]
     ); ?>
 
+    <?= $form->field($model, 'garagetype_id')->dropDownList(
+        ArrayHelper::map(Garagetype::find()->all(), 'id', 'name'),
+        ['prompt' => 'Все виды']
+    );?>
     <?/*= $form->field($model, 'earthtype_id')->dropDownList(
         ArrayHelper::map(Earthtype::find()->all(), 'id', 'name'),
         ['prompt' => 'Все виды назначений']

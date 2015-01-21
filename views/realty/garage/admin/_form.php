@@ -12,7 +12,7 @@ use kartik\file\FileInput;
 use app\models\Role;
 use app\models\User;
 use app\models\Status;
-use app\models\Earthtype;
+use app\models\Garagetype;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Realty */
@@ -42,15 +42,13 @@ use app\models\Earthtype;
 
     <?= $form->field($model, 'region_id')->dropDownList(
         ArrayHelper::map(Region::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Выберите район'
-        ]
+        ['prompt'    => 'Выберите район']
     );?>
 
-    <?/*= $form->field($model, 'earthtype_id')->dropDownList(
-        ArrayHelper::map(Earthtype::find()->all(), 'id', 'name'),
-        ['prompt' => 'Все виды назначений']
-    );*/?>
+    <?= $form->field($model, 'garagetype_id')->dropDownList(
+        ArrayHelper::map(Garagetype::find()->all(), 'id', 'name'),
+        ['prompt' => 'Все виды']
+    );?>
 
     <?/*= $form->field($model, 'builder_id')->dropDownList(
         ArrayHelper::map(Builder::find()->all(), 'id', 'name'),
@@ -87,7 +85,7 @@ use app\models\Earthtype;
         ]
     );*/?>
 
-    <?//= $form->field($model, 'square')->textInput(['placeholder' => 'Квадратура квартиры без единиц измерения']);?>
+    <?= $form->field($model, 'square')->textInput(['placeholder' => 'Квадратура гаража или парковки без единиц измерения']);?>
 
     <?= $form->field($model, 'address')->textInput();?>
 

@@ -40,7 +40,7 @@ use metalguardian\fotorama\Fotorama;
                 <div class="detail-text"><?=$object->region->name.' р-н, '.$object->address;?></div>
                 <div class="detail-extra">
                     <table class="detail-extra-table">
-                        <tr><td>Тип назначения:</td><td><?=$object->earthtype->name;?></td></tr>
+                        <tr><td>Тип:</td><td><?=$object->garagetype->name;?></td></tr>
                         <tr><td>Общая площадь:</td><td><?=$object->square;?> м<sup>2</sup></td></tr>
                         <tr><td>Цена:</td><td><?=$object->price;?> руб.</td></tr>
                     </table>

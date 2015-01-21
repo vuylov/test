@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\models\Region;
-use app\models\Earthtype;
+use app\models\Garagetype;
 ?>
 <div class="app-filter">
     <?php $form = ActiveForm::begin([
@@ -28,6 +28,14 @@ use app\models\Earthtype;
             <td>
                 <?php echo $form->field($model, 'address') ?>
             </td>
+            <td>
+                <?= $form->field($model, 'garagetype_id')->dropDownList(
+                    ArrayHelper::map(Garagetype::find()->all(), 'id', 'name'),
+                    [
+                        'prompt'    => 'Все виды'
+                    ]
+                )->label('Вид'); ?>
+            </td>
         </tr>
         <tr>
             <td>
@@ -36,6 +44,7 @@ use app\models\Earthtype;
             <td>
                 <?php echo $form->field($model, 'afterPrice');?>
             </td>
+            <td></td>
         </tr>
         <tr>
             <td colspan="3">
