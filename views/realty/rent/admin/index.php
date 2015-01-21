@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 ?>
-<h2>Продажа коммерческой недвижимости</h2>
+<h2>Аренда</h2>
 <?php echo $this->render('_search', ['model' => $searchModel, 'type' => $type]); ?>
 <div class="pull-right">
     <?=Html::a('Добавить аренду', ['create', 'type' => $type], ['class' => 'btn btn-success']); ?>
