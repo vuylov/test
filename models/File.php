@@ -3,7 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\base\Exception;
 use yii\db\Expression;
+use yii\helpers\VarDumper;
 use yii\imagine\Image;
 use Imagine\Image\ManipulatorInterface;
 /**
@@ -79,8 +81,18 @@ class File extends \yii\db\ActiveRecord
             $dbFile->save();
 
             $file->saveAs($dbFile->path);
-            $thumbnail = Image::thumbnail($dbFile->path, 400, 300, ManipulatorInterface::THUMBNAIL_INSET);
-            $thumbnail->save(Yii::getAlias('@webroot').'/'.$dbFile->thumbnail);
+
+
+            //$thumbnail = Image::thumbnail($dbFile->path, 400, 300);
+
+            /*
+            try{
+                $thumbnail = Image::thumbnail($dbFile->path, 400, 300, ManipulatorInterface::THUMBNAIL_INSET);
+                $thumbnail->save(Yii::getAlias('@webroot').'/'.$dbFile->thumbnail);
+            }catch (Exception $e){
+                VarDumper::dump($e, 10, true);
+            }*/
+            unset($dbFile);
         }
     }
 

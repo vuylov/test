@@ -100,7 +100,7 @@ use app\models\Garagetype;
         <div>
             <?php foreach($file as $f):?>
                 <div class="image-item">
-                    <?=Html::img('@web/'.$f->thumbnail, ['id' => 'file-'.$f->id,'class' => 'file-preview-image', 'alt' => $f->name, 'data' => $f->id]);?>
+                    <?=Html::img('@web/'.$f->path, ['id' => 'file-'.$f->id,'class' => 'file-preview-image', 'alt' => $f->name, 'data' => $f->id]);?>
                     <?=Html::a('Удалить', ['file/delete', 'id' => $f->id, 'model'=> $model->id], ['class' => 'btn btn-danger delete-image']);?>
                 </div>
             <?php endforeach;?>

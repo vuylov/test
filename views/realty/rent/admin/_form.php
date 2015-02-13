@@ -93,7 +93,7 @@ use app\models\Commercetype;
         ]
     );*/?>
 
-    <?//= $form->field($model, 'square')->textInput(['placeholder' => 'Квадратура квартиры без единиц измерения']);?>
+    <?= $form->field($model, 'square')->textInput(['placeholder' => 'Квадратура без единиц измерения']);?>
 
     <?= $form->field($model, 'address')->textInput();?>
 
@@ -108,7 +108,7 @@ use app\models\Commercetype;
         <div>
             <?php foreach($file as $f):?>
                 <div class="image-item">
-                    <?=Html::img('@web/'.$f->thumbnail, ['id' => 'file-'.$f->id,'class' => 'file-preview-image', 'alt' => $f->name, 'data' => $f->id]);?>
+                    <?=Html::img('@web/'.$f->path, ['id' => 'file-'.$f->id,'class' => 'file-preview-image', 'alt' => $f->name, 'data' => $f->id]);?>
                     <?=Html::a('Удалить', ['file/delete', 'id' => $f->id, 'model'=> $model->id], ['class' => 'btn btn-danger delete-image']);?>
                 </div>
             <?php endforeach;?>

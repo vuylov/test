@@ -79,6 +79,7 @@ div.item-realty{
     margin-bottom: 5px;
     width: 49%;
     float: left;
+    height: 210px;
 }
 .pagination > li > a {
     color: #ffae00;

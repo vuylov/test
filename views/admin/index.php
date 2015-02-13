@@ -14,5 +14,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <hr>
-
+    <div>В систему загружено <?=$count?> объект(ов) недвижимости</div>
 </div>

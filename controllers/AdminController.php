@@ -49,7 +49,8 @@ class AdminController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $count = Realty::find()->count();
+        return $this->render('index', compact(['count']));
     }
 
     /**
@@ -110,7 +111,6 @@ class AdminController extends Controller
             if(count($files) > 0){
                 File::SaveImagesWithThumbnails($files, $model);
             }
-
             return $this->redirect(['view', 'type' => $type,'id' => $model->id]);
         } else {
             return $this->render('//realty/'.$modelView['folder'].'/admin/create', [

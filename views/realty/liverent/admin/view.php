@@ -35,12 +35,14 @@ use app\models\Status;
         ]
     ]);?>
     <?php if($images !== null):?>
-            <?php foreach($images as $image):?>
-                <?php $items[] = Yii::$app->formatter->asImage('@web/'.$image->thumbnail, ['title' => $image->name, 'alt' => $image->name]);?>
-            <?php endforeach;?>
-            <?=Carousel::widget([
-            'items' => $items
-        ]);?>
+            <div class="col-md-6">
+                <?php foreach($images as $image):?>
+                    <?php $items[] = Yii::$app->formatter->asImage('@web/'.$image->path, ['title' => $image->name, 'alt' => $image->name]);?>
+                <?php endforeach;?>
+                <?=Carousel::widget([
+                    'items' => $items
+                ]);?>
+            </div>
     <?php endif;?>
     <div class="pull-right">
         <?= Html::a('Редактировать', ['admin/update', 'id' => $model->id], ['class' => 'btn btn-success']);?>

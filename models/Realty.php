@@ -109,7 +109,7 @@ class Realty extends ActiveRecord
     {
         return [
             [['type_id', 'region_id', 'price', 'address', 'detail', 'owner'], 'required', 'message' => 'Данное поле обязательно для заполненния'],
-            [['type_id', 'user_id', 'region_id', 'builder_id', 'room_id', 'layout_id', 'housetype_id', 'category_id','furnish_id','earthtype_id','commercetype_id', 'price', 'status', 'square', 'square_plot'], 'integer', 'message' => 'Данное поле может быть только числовым'],
+            [['type_id', 'user_id', 'region_id', 'builder_id', 'room_id', 'layout_id', 'housetype_id', 'category_id','furnish_id','earthtype_id','commercetype_id','garagetype_id', 'price', 'status', 'square', 'square_plot'], 'integer', 'message' => 'Данное поле может быть только числовым'],
             [['detail'], 'string'],
             [['file'], 'file', 'maxFiles' => 5, 'message' => 'Вы можете добавить не больше 5 изображений'],
             [['create_time', 'deactivate_time'], 'safe'],
@@ -145,6 +145,7 @@ class Realty extends ActiveRecord
             'file'          => 'Изображение для загрузки',
             'earthtype_id'  => 'Назначение',
             'commercetype_id'=> 'Тип коммерческой недвжимиости',
+            'garagetype_id' => 'Тип гаража'
         ];
     }
 
@@ -229,6 +230,14 @@ class Realty extends ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGaragetype()
+    {
+        return $this->hasOne(Garagetype::className(), ['id' => 'garagetype_id']);
+    }
+
+    /**
      * @return \yii\ActiveQuery
      */
     public function getCategory()
@@ -264,7 +273,7 @@ class Realty extends ActiveRecord
             $files  = $this->files;
             $key    = array_rand($files, 1);
             $img    = $files[$key];
-            return Yii::getAlias('@web').'/'.$img->thumbnail;
+            return Yii::getAlias('@web').'/'.$img->path;
         }
         else{
             return Yii::getAlias('@web').Yii::$app->params['realty_default_image'];

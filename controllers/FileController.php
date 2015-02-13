@@ -42,7 +42,7 @@ class FileController extends Controller{
         if($file !== null){
             $file->delete();
             unlink(Yii::getAlias('@webroot').'/'.$file->path);
-            unlink(Yii::getAlias('@webroot').'/'.$file->thumbnail);
+            //unlink(Yii::getAlias('@webroot').'/'.$file->thumbnail);
         }
         return $this->redirect(['admin/update', 'id' => $model]);
     }

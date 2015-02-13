@@ -22,7 +22,7 @@ class RealtySearch extends Realty
     public function rules()
     {
         return [
-            [['id', 'type_id', 'user_id', 'region_id', 'builder_id', 'room_id', 'layout_id', 'housetype_id', 'category_id', 'furnish_id', 'price', 'status'], 'integer'],
+            [['id', 'type_id', 'user_id', 'region_id', 'builder_id', 'room_id', 'layout_id', 'housetype_id', 'category_id', 'furnish_id','garagetype_id', 'commercetype_id','price', 'status'], 'integer'],
             [['square', 'square_plot', 'address', 'detail', 'owner', 'create_time', 'deactivate_time', 'beforePrice', 'afterPrice'], 'safe'],
         ];
     }
@@ -57,8 +57,9 @@ class RealtySearch extends Realty
             'afterPrice'    => 'Цена до',
             'earthtype_id'  => 'Тип назначения',
             'commercetype_id'=> 'Тип коммерческой недвжимиости',
+            'garagetype_id' => 'Тип гаража',
             'user_id'       => 'Недвижимость добавил',
-            'status'        => 'Активность объекта'
+            'status'        => 'Активность объекта',
         ];
     }
 
@@ -92,14 +93,14 @@ class RealtySearch extends Realty
                 'user_id'   => Yii::$app->user->id
             ]);
 
-        $query->addOrderBy('create_time');
+        $query->addOrderBy('create_time DESC');
 
         $dataProvider = new ActiveDataProvider([
             'query'     => $query,
             'pagination'=> [
                 'pageSize'  => Yii::$app->params['countItemPage']
             ],
-            'sort'  => ['defaultOrder' => ['create_time' => SORT_ASC]]
+            'sort'  => ['defaultOrder' => ['create_time' => SORT_DESC]]
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -123,6 +124,7 @@ class RealtySearch extends Realty
             'furnish_id'        => $this->furnish_id,
             'earthtype_id'      => $this->earthtype_id,
             'commercetype_id'   => $this->commercetype_id,
+            'garagetype_id'     => $this->garagetype_id,
         ]);
 
         $query->andFilterWhere(['like', 'square', $this->square])
