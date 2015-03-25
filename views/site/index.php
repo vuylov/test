@@ -2,15 +2,15 @@
 /* @var $this yii\web\View */
 use yii\bootstrap\Carousel;
 use app\components\NewOffer;
-
+use yii\helpers\Html;
 ?>
 
 <div class="site-index">
     <?= Carousel::widget([
         'items' => [
-            '<img src="'.dirname(Yii::$app->homeUrl).'/img/slide1.jpg">',
-            '<img src="'.dirname(Yii::$app->homeUrl).'/img/slide2.jpg">',
-            '<img src="'.dirname(Yii::$app->homeUrl).'/img/slide1.jpg">',
+           Html::img('@web/img/slide1.jpg'),
+            Html::img('@web/img/slide2.jpg'),
+            Html::img('@web/img/slide1.jpg'),
         ]
     ]);?>
 </div>

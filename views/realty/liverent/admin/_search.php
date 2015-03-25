@@ -39,14 +39,6 @@ use app\models\Status;
             'prompt'    => 'Все районы'
         ]
     ); ?>
-
-    <?/*= $form->field($model, 'builder_id')->dropDownList(
-        ArrayHelper::map(Builder::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Любой застройщик'
-        ]
-    ); */?>
-
     <?php /*echo $form->field($model, 'room_id')->dropDownList(
         ArrayHelper::map(Room::find()->all(), 'id', 'name'),
         [
@@ -89,3 +81,4 @@ use app\models\Status;
 
     <?php ActiveForm::end(); ?>
 </div>
+<div class="clearfix"></div>

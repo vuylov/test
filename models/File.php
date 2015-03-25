@@ -99,11 +99,20 @@ class File extends \yii\db\ActiveRecord
     public static function deleteImagesByModel(Realty $model)
     {
         $files = File::find()->where(['realty_id' => $model->id])->all();
-        foreach($files as $file)
-        {
-            unlink(Yii::getAlias('@webroot').'/'.$file->path);
-            unlink(Yii::getAlias('@webroot').'/'.$file->thumbnail);
-            $file->delete();
-        }
+		if($files){
+			foreach($files as $file)
+			{
+				$fp = Yii::getAlias('@webroot').'/'.$file->path;
+				if(file_exists($fp)){
+					unlink($fp);
+				}
+				
+				$thumb = Yii::getAlias('@webroot').'/'.$file->thumbnail;
+				if(file_exists($thumb)){
+					unlink($thumb);
+				}
+				$file->delete();
+			}
+		}
     }
 }

@@ -34,9 +34,9 @@ AppAsset::register($this);
                 ['label' => 'Главная', 'url' => ['/site/index']],
                 ['label' => 'Контакты', 'url' => ['/site/contact']],
                 ['label' => 'Партнеры', 'url' => ['/site/partners']],
-                (Yii::$app->user->identity->role_id)?
+                (Yii::$app->user->identity && Yii::$app->user->identity->role_id)?
                     ['label' => 'Недвижимость', 'url' => ['admin/index']]:'',
-                (Yii::$app->user->identity->role_id == Role::ADMIN)?
+                (Yii::$app->user->identity && Yii::$app->user->identity->role_id == Role::ADMIN)?
                     ['label' => 'Пользователи', 'url' => ['user/index']]:'',
                 Yii::$app->user->isGuest ?
                     ['label' => 'Войти', 'url' => ['/site/login']] :

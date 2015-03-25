@@ -81,14 +81,14 @@ class RealtySearch extends Realty
             //'status'    => $active
         ]);
 
-        if(Yii::$app->user->identity->role_id !== Role::ADMIN)
+        if(Yii::$app->user->identity && Yii::$app->user->identity->role_id !== Role::ADMIN)
         {
             $query->andWhere([
                 'status'    => $active
             ]);
         }
 
-        if(Yii::$app->user->identity->role_id == Role::REALTOR)
+        if(Yii::$app->user->identity && Yii::$app->user->identity->role_id == Role::REALTOR)
             $query->andWhere([
                 'user_id'   => Yii::$app->user->id
             ]);

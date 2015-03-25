@@ -7,11 +7,13 @@ use yii\widgets\ListView;
 <div class="pull-right">
     <?=Html::a('Добавить квартиру', ['create', 'type' => $type], ['class' => 'btn btn-success']); ?>
 </div>
+<div class="clearfix"></div>
 <hr>
 <div class="app=list">
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
+		'emptyText'	=> 'Предложений не найдено',
         'itemView' => function ($model, $key, $index, $widget) use ($type){
             return Html::a(Html::encode($model->address), ['view', 'type' => $type,'id' => $model->id]);
         },

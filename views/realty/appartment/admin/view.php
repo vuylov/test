@@ -34,7 +34,7 @@ use app\models\Status;
             ['label' => 'Добавил', 'value' => $model->user->fullname],
         ]
     ]);?>
-    <?php if($images !== null):?>
+    <?php if($images):?>
         <div class="col-md-5">
             <?php foreach($images as $image):?>
                 <?php $items[] = Yii::$app->formatter->asImage('@web/'.$image->path, ['title' => $image->name, 'alt' => $image->name]);?>

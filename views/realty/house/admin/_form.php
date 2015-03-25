@@ -52,41 +52,6 @@ use app\models\Housetype;
         ['prompt' => 'Все типы домов']
     );?>
 
-    <?/*= $form->field($model, 'builder_id')->dropDownList(
-        ArrayHelper::map(Builder::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Выберите застройщика'
-        ]
-    );*/?>
-
-    <?/*= $form->field($model, 'room_id')->dropDownList(
-        ArrayHelper::map(Room::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Выберите количество комнат'
-        ]
-    );*/?>
-
-    <?/*= $form->field($model, 'category_id')->dropDownList(
-        ArrayHelper::map(Category::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Выберите тип постройки'
-        ]
-    );*/?>
-
-    <?/*= $form->field($model, 'layout_id')->dropDownList(
-        ArrayHelper::map(Layout::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Выберите тип планировки'
-        ]
-    );*/?>
-
-    <?/*= $form->field($model, 'furnish_id')->dropDownList(
-        ArrayHelper::map(Furnish::find()->all(), 'id', 'name'),
-        [
-            'prompt'    => 'Выберите тип отделки'
-        ]
-    );*/?>
-
     <?= $form->field($model, 'square')->textInput(['placeholder' => 'Квадратура квартиры без единиц измерения']);?>
 
     <?= $form->field($model, 'address')->textInput();?>
