@@ -20,9 +20,9 @@ use app\models\Status;
             //['label' => 'Количество комнат', 'value' => ($model->room->name)?$model->room->name: 'Нет информации'],
             //['label' => 'Тип постройки', 'value' => ($model->category->name)?$model->category->name: 'Нет информации'],
             //['label' => 'Тип планировки', 'value' => ($model->layout->name)?$model->layout->name: 'Нет информации'],
-            ['label' => 'Тип дома', 'value' => ($model->housetype->name)?$model->housetype->name:'Нет информации'],
+            ['label' => 'Тип дома', 'value' => ($model->housetyp)?$model->housetype->name:'Нет информации'],
             ['label' => 'Площадь', 'value' => ($model->square)?$model->square.' м2': 'Нет информации'],
-            ['label' => 'Отделка', 'value' => ($model->furnish->name)?$model->furnish->name: 'Нет информации'],
+            ['label' => 'Отделка', 'value' => ($model->furnish)?$model->furnish->name: 'Нет информации'],
             ['label' => 'Адрес', 'value' => ($model->address)?$model->address: 'Нет информации'],
             ['label' => 'Детали', 'value' => ($model->detail)?$model->detail: 'Нет информации'],
             /*(Yii::$app->user->identity->role_id == Role::ADMIN)?

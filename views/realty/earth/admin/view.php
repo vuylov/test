@@ -20,7 +20,7 @@ use app\models\Status;
             //['label' => 'Количество комнат', 'value' => ($model->room->name)?$model->room->name: 'Нет информации'],
             //['label' => 'Тип постройки', 'value' => ($model->category->name)?$model->category->name: 'Нет информации'],
             //['label' => 'Тип планировки', 'value' => ($model->layout->name)?$model->layout->name: 'Нет информации'],
-            ['label' => 'Назначение', 'value' => ($model->earthtype->name)?$model->earthtype->name:'Нет информации'],
+            ['label' => 'Назначение', 'value' => ($model->earthtype)?$model->earthtype->name:'Нет информации'],
             ['label' => 'Площадь', 'value' => ($model->square)?$model->square: 'Нет информации'],
             //['label' => 'Отделка', 'value' => ($model->furnish->name)?$model->furnish->name: 'Нет информации'],
             ['label' => 'Адрес', 'value' => ($model->address)?$model->address: 'Нет информации'],

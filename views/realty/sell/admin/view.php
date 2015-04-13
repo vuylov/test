@@ -22,7 +22,7 @@ use app\models\Status;
             //['label' => 'Тип планировки', 'value' => ($model->layout->name)?$model->layout->name: 'Нет информации'],
             //['label' => 'Назначение', 'value' => ($model->earthtype->name)?$model->earthtype->name:'Нет информации'],
             //['label' => 'Площадь', 'value' => ($model->square)?$model->square: 'Нет информации'],
-            ['label' => 'Тип недвижимости', 'value' => ($model->commercetype->name)?$model->commercetype->name: 'Нет информации'],
+            ['label' => 'Тип недвижимости', 'value' => ($model->commercetype)?$model->commercetype->name: 'Нет информации'],
             ['label' => 'Адрес', 'value' => ($model->address)?$model->address: 'Нет информации'],
             ['label' => 'Детали', 'value' => ($model->detail)?$model->detail: 'Нет информации'],
             ['label' => 'Информация о владельце', 'value' => ($model->owner)?$model->owner: 'Нет информации'],
