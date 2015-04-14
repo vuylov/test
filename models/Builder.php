@@ -29,7 +29,7 @@ class Builder extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description'], 'required'],
+            [['name', 'description'], 'required', 'message' => '{attribute} не может быть пустым'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 50]
         ];
@@ -42,8 +42,8 @@ class Builder extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
+            'name' => 'Название',
+            'description' => 'Текстовое описание',
         ];
     }
 

@@ -26,14 +26,14 @@ AppAsset::register($this);
     <div class="center-block" style="width: 200px;margin-top: 5px">
            <a href="<?=Yii::$app->homeUrl; ?>"><img src="<?=Yii::getAlias('@web'); ?>/img/logo.png"></a>
     </div>
-    <div class="center-block" style="width: 400px;margin-top: 5px">
+    <div class="center-block" style="margin-top: 5px; text-align: center">
         <?php
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav'],
             'items' => [
                 ['label' => 'Главная', 'url' => ['/site/index']],
                 ['label' => 'Контакты', 'url' => ['/site/contact']],
-                ['label' => 'Партнеры', 'url' => ['/site/partners']],
+                //['label' => 'Партнеры', 'url' => ['/site/partners']],
                 (Yii::$app->user->identity && Yii::$app->user->identity->role_id)?
                     ['label' => 'Недвижимость', 'url' => ['admin/index']]:'',
                 (Yii::$app->user->identity && Yii::$app->user->identity->role_id == Role::ADMIN)?

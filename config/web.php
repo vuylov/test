@@ -13,8 +13,13 @@ $config = [
             //'enableCsrfValidation' => false,
         ],
         'urlManager' => [
-            'enablePrettyUrl'   => true,
-            'showScriptName'    => true,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
+                '<_c:[\w\-]+>' => '<_c>/index',
+                '<_c:[\w\-]+>/<_a:[\w\-]+>/<id:\d+>' => '<_c>/<_a>',
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
