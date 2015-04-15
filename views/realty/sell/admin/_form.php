@@ -3,18 +3,12 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\models\Region;
-/*use app\models\Builder;
-use app\models\Room;
-use app\models\Category;
-use app\models\Layout;
-use app\models\Furnish;*/
 use kartik\file\FileInput;
 use app\models\Role;
 use app\models\User;
 use app\models\Status;
-//use app\models\Earthtype;
 use app\models\Commercetype;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Realty */
 /* @var $form yii\widgets\ActiveForm */
@@ -70,6 +64,20 @@ use app\models\Commercetype;
                 <div class="image-item">
                     <?=Html::img('@web/'.$f->path, ['id' => 'file-'.$f->id,'class' => 'file-preview-image', 'alt' => $f->name, 'data' => $f->id]);?>
                     <?=Html::a('Удалить', ['file/delete', 'id' => $f->id, 'model'=> $model->id], ['class' => 'btn btn-danger delete-image']);?>
+                    <?php if($f->path !== $model->thumb):?>
+                        <?=Html::a('Превью', ['#'], ['class' => 'btn btn-success img-first-preview',
+                            'onclick'   => "
+                                    $.ajax({
+                                        type: 'POST',
+                                        cache: false,
+                                        url: '".Url::to(['file/thumbnail', 'id' => $f->id, 'model' => $model->id])."',
+                                        success: function(response){
+                                            alert(response);
+                                            location.reload();
+                                        }
+                                    });return false;"
+                        ]);?>
+                    <?php endif;?>
                 </div>
             <?php endforeach;?>
         </div>

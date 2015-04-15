@@ -51,7 +51,7 @@ class NewOffer extends Widget{
         if(count($realties) > 0){
             $html = '<ul class="offers">';
             foreach($realties as $realty){
-                $html.='<li><div class="img-container"><a href="'.Url::to(['realty/view', 'type' => $realty->type_id, 'id' => $realty->id]).'"><img src="'.$realty->randomImg.'" width="218px" class="img-responsive img-thumbnail"></a>';
+                $html.='<li><div class="img-container"><a href="'.Url::to(['realty/view', 'type' => $realty->type_id, 'id' => $realty->id]).'"><img src="'.$realty->thumbnail.'" width="218px" class="img-responsive img-thumbnail"></a>';
                 $html.='<div class="realty-price">'.$realty->price.' руб.</div></div>';
                 $html.='<div class="small">'.$realty->type->name.'</div>';
                 $html.='<div class="small">'.$realty->region->name.' р-н</div>';

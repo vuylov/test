@@ -9,10 +9,11 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Realty;
+use app\models\File as F;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
-use app\models\File;
 use yii\web\NotFoundHttpException;
 
 class FileController extends Controller{
@@ -45,5 +46,26 @@ class FileController extends Controller{
             //unlink(Yii::getAlias('@webroot').'/'.$file->thumbnail);
         }
         return $this->redirect(['admin/update', 'id' => $model]);
+    }
+
+    public function actionThumbnail($id = null, $model = null)
+    {
+        if(!$id && $model){
+            echo 'Отсутствуют обязательные параметры';
+            exit;
+        }
+
+        $file   = F::findOne($id);
+        $model  = Realty::findOne($model);
+
+        if(!$file && !$model){
+            echo 'Модели не найдены в базе';
+            exit;
+        }else{
+
+            $model->thumb = $file->path;
+            $model->save();
+            echo 'Стартовое изображение предпросмотра установлено успешно';
+        }
     }
 } 

@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Faker\Provider\File;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
@@ -267,8 +266,9 @@ class Realty extends ActiveRecord
         return false;
     }
 
-    public function getRandomImg()
+    public function getThumbnail()
     {
+        /*
         if(count($this->files) > 0){
             $files  = $this->files;
             $key    = array_rand($files, 1);
@@ -276,6 +276,17 @@ class Realty extends ActiveRecord
             return Yii::getAlias('@web').'/'.$img->path;
         }
         else{
+            return Yii::getAlias('@web').Yii::$app->params['realty_default_image'];
+        }*/
+
+        if($this->thumb){
+            return Yii::getAlias('@web').'/'.$this->thumb;
+            exit;
+        }elseif(count($this->files) > 0){
+            $files  = $this->files;
+            $img    = $files[0];
+            return Yii::getAlias('@web').'/'.$img->path;
+        }else{
             return Yii::getAlias('@web').Yii::$app->params['realty_default_image'];
         }
     }

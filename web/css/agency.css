@@ -127,3 +127,7 @@ ul.navbar-nav{
 ul.navbar-nav li {
     display: inline-block;
 }
+.img-first-preview{
+    position: absolute;
+    top: 5px;
+}
