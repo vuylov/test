@@ -12,7 +12,7 @@ use yii\widgets\ListView;
             'emptyText'     => '<div class="alert alert-warning" role="alert"><strong>По вашему запросу ничего не найдено</strong></div>',
             'layout'        => '{summary}{items}<div class="clearfix"></div><div class="center-block">{pager}</div>',
             'itemView' => function ($model, $key, $index, $widget) use ($type){
-                $template ='<div class="item-view"><div class="img-container" style="width: 218px"><img src="'.$model->randomImg.'" width="218px" class="img-responsive img-thumbnail"><div class="realty-price">'.$model->price.' руб.</div></div>';
+                $template ='<div class="item-view"><div class="img-container" style="width: 218px"><img src="'.$model->thumbnail.'" width="218px" class="img-responsive img-thumbnail"><div class="realty-price">'.$model->price.' руб.</div></div>';
                 $template.= '<div class="item-description">';
                 $template.='<div><strong>Адрес</strong>: '.$model->address.'</div>';
                 $template.='<div><strong>Район</strong>: '.$model->region->name.'</div>';
